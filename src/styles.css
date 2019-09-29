@@ -1,0 +1,33 @@
+body {
+  font-family: sans-serif;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #7f7f7f;
+  border-collapse: collapse;
+}
+td {
+  border: 1px solid #7f7f7f;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 10px;
+  color: blue;
+}
+
+h3 {
+  color: red;
+  text-align: center;
+  font-size: 10px;
+}
