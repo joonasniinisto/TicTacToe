@@ -1,16 +1,23 @@
 import "./styles.css";
 
 document.getElementById("board").innerHTML = `
+
 <h1>Tic Tac Toe</h1>
 
 
 <h2>PLAYER 1 plays with X</h2>
-<h3>PLAYER 2 plays with O </h3>`;
+<h3>PLAYER 2 plays with O </h3`;
 
 var counter = 0;
 
+var myVar;
+
 var body = document.body,
   table = document.createElement("table");
+
+var elem = document.getElementById("myBar");
+
+var width = 0;
 
 function createTable() {
   for (var i = 0; i < 5; i++) {
@@ -47,11 +54,15 @@ function onclick(table) {
 }
 
 function tableText(tableCell) {
+  move();
+  myStopFunction();
   if (counter % 2 === 0) {
     if (tableCell.innerHTML === "") {
+      tableCell.style.backgroundColor = "rgb(124, 252, 0)";
       tableCell.innerHTML = "X";
       whoWon(table);
       checkDraw(table);
+      myFunction();
       counter++;
     } else {
       alert("Pick other cell, it's already populated:(");
@@ -59,8 +70,10 @@ function tableText(tableCell) {
   } else {
     if (tableCell.innerHTML === "") {
       tableCell.innerHTML = "O";
+      tableCell.style.backgroundColor = "rgb(250, 128, 114)";
       whoWon(table);
       checkDraw(table);
+      myFunction();
       counter++;
     } else {
       alert("Cell already used");
@@ -156,8 +169,15 @@ function whoWon(table) {
 
 function clearTable(table) {
   for (var i = 0; i < table.rows.length; i++) {
-    for (var j = 0; j < table.rows[i].cells.length; j++)
+    for (var j = 0; j < table.rows[i].cells.length; j++) {
       table.rows[i].cells[j].innerHTML = "";
+    }
+  }
+
+  for (var k = 0, row; (row = table.rows[k]); k++) {
+    for (var h = 0, col; (col = row.cells[h]); h++) {
+      col.style.backgroundColor = "white";
+    }
   }
 }
 
@@ -177,4 +197,41 @@ function checkDraw(table) {
     clearTable(table);
     counter = 0;
   }
+}
+
+function clearWidth() {
+  width = 0;
+  elem.style.width = width + "%";
+  elem.innerHTML = width + "%";
+}
+
+function move() {
+  clearWidth();
+  clearInterval(id);
+  var width = 0;
+  var id = setInterval(frame, 100);
+  function frame() {
+    if (width >= 100) {
+      clearWidth();
+      clearInterval(id);
+    } else {
+      width++;
+      elem.style.width = width + "%";
+      elem.innerHTML = Math.round(width / 10) + "s";
+    }
+  }
+}
+
+function myFunction() {
+  myVar = setTimeout(TimeOut, 10000);
+}
+
+function myStopFunction() {
+  clearTimeout(myVar);
+}
+
+function TimeOut() {
+  alert("TIMEOUT!");
+  move();
+  counter++;
 }
